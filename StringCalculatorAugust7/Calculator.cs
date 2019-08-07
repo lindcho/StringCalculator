@@ -6,10 +6,11 @@ namespace StringCalculatorAugust7
     {
         public int Add(string input)
         {
+            const char delimiter = ',';
             if (string.IsNullOrEmpty(input))
                 return 0;
 
-            var numberStringArray = input.Replace('\n', ',').Split(',');
+            var numberStringArray = input.Replace('\n', delimiter).Split(delimiter);
             GetCustomDelimiter(ref numberStringArray);
             var numberArray = numberStringArray.Where(x => !string.IsNullOrEmpty(x)).Select(int.Parse).ToArray();
             return numberArray.Where(x => x > 0 && x <= 1000).Sum(x => x);
