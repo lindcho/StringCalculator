@@ -1,0 +1,11 @@
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\bin\Debug\StringCalculatorAugust7.Tests.dll
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\bin\Debug\StringCalculatorAugust7.Tests.pdb
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\bin\Debug\nunit.framework.dll
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\bin\Debug\StringCalculatorAugust7.dll
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\bin\Debug\StringCalculatorAugust7.pdb
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\bin\Debug\nunit.framework.xml
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\obj\Debug\StringCalculatorAugust7.Tests.csprojAssemblyReference.cache
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\obj\Debug\StringCalculatorAugust7.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\obj\Debug\StringCalculatorAugust7.Tests.csproj.CopyComplete
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\obj\Debug\StringCalculatorAugust7.Tests.dll
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7.Tests\obj\Debug\StringCalculatorAugust7.Tests.pdb

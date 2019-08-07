@@ -1,0 +1,6 @@
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7\bin\Debug\StringCalculatorAugust7.dll
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7\bin\Debug\StringCalculatorAugust7.pdb
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7\obj\Debug\StringCalculatorAugust7.csprojAssemblyReference.cache
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7\obj\Debug\StringCalculatorAugust7.csproj.CoreCompileInputs.cache
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7\obj\Debug\StringCalculatorAugust7.dll
+C:\Users\Lindokuhle\source\repos\StringCalculatorAugust7\StringCalculatorAugust7\obj\Debug\StringCalculatorAugust7.pdb
