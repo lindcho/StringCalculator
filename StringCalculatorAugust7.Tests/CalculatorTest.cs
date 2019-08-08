@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace StringCalculatorAugust7.Tests
 {
@@ -93,6 +94,19 @@ namespace StringCalculatorAugust7.Tests
             var actual = sut.Add(input);
             //Assert
             Assert.That(actual, Is.EqualTo(expectedResult));
+        }
+
+        [TestCase("1,12,-3,-4", "negatives not allowed -3 -4")]
+        [TestCase("8,-5,-12,-4", "negatives not allowed -5 -12 -4")]
+        [TestCase("1,9,-20,10", "negatives not allowed -20")]
+        public void Add_GivenInputWithNegativeNumbers_ShouldReturnNegativesNotAllowed(string input, string expectedMessage)
+        {
+            //
+            var sut = new Calculator();
+            //
+            var ex = Assert.Throws<Exception>(() => sut.Add(input));
+            //
+            Assert.That(ex.Message, Is.EqualTo(expectedMessage));
         }
     }
 }
