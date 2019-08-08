@@ -47,7 +47,8 @@ namespace StringCalculatorAugust8.Tests
         }
 
         [TestCase("4\n2,4", 10)]
-        [TestCase("4,\n", 4)]
+        [TestCase("10\n5,12", 27)]
+        [TestCase("10\n2", 12)]
         public void Add_GivenNumberInputStringWithNewLineBetweenNumbers_ShouldHandleNewLinesAndReturnSum(string input, int expectedResult)
         {
             //Arrange
@@ -70,16 +71,9 @@ namespace StringCalculatorAugust8.Tests
         {
             const char delimiter = ',';
             if (string.IsNullOrEmpty(input)) return 0;
-            if (input.Contains('\n'))
-            {
-                input = input.Replace('\n', delimiter);
-            }
-            if (input.Contains(','))
-            {
-                var result = input.Split(delimiter);
-                return result.Sum(x => int.Parse(x));
-            }
-            return int.Parse(input);
+            var inputStringArray = input.Replace('\n', delimiter).Split(delimiter);
+
+            return inputStringArray.Sum(x=>int.Parse(x));
         }
     }
 }
