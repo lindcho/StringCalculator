@@ -58,6 +58,19 @@ namespace StringCalculatorAugust8.Tests
             Assert.That(actual, Is.EqualTo(expectedResult));
         }
 
+        [TestCase("//;\n1;2", 3)]
+        [TestCase("//;\n5;6;4", 15)]
+        [TestCase("//;\n1;2;7;2", 12)]
+        public void Add_GivenNumberInputStringWithSeparateLine_ShouldHandleSeparateLinesAndReturnSum(string input, int expectedResult)
+        {
+            //Arrange
+            var sut = CreateCalculator();
+            //Act
+            var actual = sut.Add(input);
+            //Assert
+            Assert.That(actual, Is.EqualTo(expectedResult));
+        }
+
         private static Calculator CreateCalculator()
         {
             return new Calculator();
