@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace StringCalculatorAugust8.Tests
 {
@@ -62,18 +61,6 @@ namespace StringCalculatorAugust8.Tests
         private static Calculator CreateCalculator()
         {
             return new Calculator();
-        }
-    }
-
-    public class Calculator
-    {
-        public int Add(string input)
-        {
-            const char delimiter = ',';
-            if (string.IsNullOrEmpty(input)) return 0;
-            var inputStringArray = input.Replace('\n', delimiter).Split(delimiter);
-
-            return inputStringArray.Sum(x=>int.Parse(x));
         }
     }
 }
