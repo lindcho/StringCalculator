@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace StringCalculatorAugust8
 {
@@ -10,7 +11,9 @@ namespace StringCalculatorAugust8
             if (string.IsNullOrEmpty(input)) return 0;
             var inputStringArray = input.Replace('\n', commaDelimiter).Split(commaDelimiter);
             inputStringArray = GetCustomDelimiter(inputStringArray, commaDelimiter);
-            return inputStringArray.Sum(x => int.Parse(x));
+            var numberArray = inputStringArray.Where(x => !string.IsNullOrEmpty(x)).Select(int.Parse).ToArray();
+            ValidateNegatives(numberArray);
+            return numberArray.Where(x => x < 1000).Sum(x => x);
         }
 
         private static string[] GetCustomDelimiter(string[] inputStringArray, char commaDelimiter)
@@ -27,6 +30,12 @@ namespace StringCalculatorAugust8
             }
 
             return inputStringArray;
+        }
+
+        public static void ValidateNegatives(int[] numberArray)
+        {
+            if (!numberArray.Any(x => x < 0)) return;
+            throw new Exception($"negatives not allowed {string.Join(" ", numberArray.Where(x => x < 0))}");
         }
     }
 }

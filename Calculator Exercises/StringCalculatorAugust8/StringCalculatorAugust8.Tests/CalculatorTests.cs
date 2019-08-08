@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace StringCalculatorAugust8.Tests
 {
@@ -71,6 +72,55 @@ namespace StringCalculatorAugust8.Tests
             Assert.That(actual, Is.EqualTo(expectedResult));
         }
 
+        [TestCase("1,12,-3,-4", "negatives not allowed -3 -4")]
+        [TestCase("8,-5,-12,-4", "negatives not allowed -5 -12 -4")]
+        [TestCase("1,9,-20,10", "negatives not allowed -20")]
+        public void Add_GivenInputWithNegativeNumbers_ShouldReturnNegativesNotAllowed(string input, string expectedMessage)
+        {
+            //Arrange
+            var sut = CreateCalculator();
+            //Act
+            var ex = Assert.Throws<Exception>(() => sut.Add(input));
+            //Assert
+            Assert.That(ex.Message, Is.EqualTo(expectedMessage));
+        }
+
+        [TestCase("//;\n1001;9", 9)]
+        public void Add_GivenInputGreaterThan1000_ShouldLessThan100inputOnly(string input, int expectedResult)
+        {
+            //
+            var sut = CreateCalculator();
+            //
+            var actual = sut.Add(input);
+            //
+            Assert.That(actual, Is.EqualTo(expectedResult));
+        }
+
+        [TestCase("//[***]\n1***2***3", 6)]
+        [TestCase("//[*][%]\n1*2%3", 6)]
+        [TestCase("//;\n1;2", 3)]
+        public void Play_GivenInputWithDifferentDelimitersWithAnyLength_ShouldReturnSum(string input, int expectedResult)
+        {
+            //Arrange
+            var sut = CreateCalculator();
+            //Act
+            var actual = sut.Add(input);
+            //Assert
+            Assert.That(actual, Is.EqualTo(expectedResult));
+        }
+
+        [TestCase("//***\n1***2***3", 6)]
+        [TestCase("//*%\n1*2%3", 6)]
+        [TestCase("//*%\n4*1%5", 10)]
+        public void Play_GivenInputWithDifferentDelimitersWithStarSigns_ShouldReturnTheirSum(string input, int expectedResult)
+        {
+            //Arrange
+            var sut = CreateCalculator();
+            //Act
+            var actual = sut.Add(input);
+            //Assert
+            Assert.That(actual, Is.EqualTo(expectedResult));
+        }
         private static Calculator CreateCalculator()
         {
             return new Calculator();
