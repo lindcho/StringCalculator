@@ -68,7 +68,7 @@ namespace StringCalculatorAugust8.Tests
             var sut = new CalculatorModel();
             var input = "2,3,-3,-2,1";
 
-            var actual = Assert.Throws<Exception>(() => sut.Add(input));
+            var actual = Assert.Throws<ArgumentException>(() => sut.Add(input));
             Assert.That(actual.Message, Is.EqualTo("negatives not allowed -3 -2"));
         }
     }
@@ -89,7 +89,7 @@ namespace StringCalculatorAugust8.Tests
         public static void ValidateNegatives(string[] numberArray)
         {
             if (!numberArray.Any(x => int.Parse(x) < 0)) return;
-            throw new Exception($"negatives not allowed {string.Join(" ", numberArray.Where(x => int.Parse(x) < 0))}");
+            throw new ArgumentException($"negatives not allowed {string.Join(" ", numberArray.Where(x => int.Parse(x) < 0))}");
         }
 
         private static string[] GetDelimiter(string[] numberStringArray)
