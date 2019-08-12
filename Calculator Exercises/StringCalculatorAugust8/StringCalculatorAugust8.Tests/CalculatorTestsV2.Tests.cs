@@ -71,6 +71,16 @@ namespace StringCalculatorAugust8.Tests
             var actual = Assert.Throws<ArgumentException>(() => sut.Add(input));
             Assert.That(actual.Message, Is.EqualTo("negatives not allowed -3 -2"));
         }
+
+        [Test]
+        public void Add_GivenInputWithNegativeNumber_shouldThrowException()
+        {
+            var sut=new CalculatorModel();
+            var input = "-1,-3,-2,-7";
+
+            var actual = Assert.Throws<ArgumentException>(() => sut.Add(input));
+            Assert.That(actual.Message,Is.EqualTo("negatives not allowed -1 -3 -2 -7"));
+        }
     }
 
     public class CalculatorModel
@@ -95,13 +105,8 @@ namespace StringCalculatorAugust8.Tests
         private static string[] GetDelimiter(string[] numberStringArray)
         {
             if (!numberStringArray[0].StartsWith("//")) return numberStringArray;
-            var customDelimiter = numberStringArray[0].Remove(0, 2);
-            foreach (var delimiter in customDelimiter)
-            {
-                numberStringArray[1] = numberStringArray[1].Replace(delimiter, ',');
-            }
 
-            numberStringArray = numberStringArray[1].Split(',');
+            numberStringArray = numberStringArray[1].Replace(';', ',').Split(',');
 
             return numberStringArray;
         }
