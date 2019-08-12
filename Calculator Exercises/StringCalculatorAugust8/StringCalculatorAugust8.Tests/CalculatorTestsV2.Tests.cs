@@ -89,11 +89,11 @@ namespace StringCalculatorAugust8.Tests
         {
             if (string.IsNullOrEmpty(input))
                 return 0;
-            var numberStringArray = input.Replace('\n', ',').Split(',');
+            var stringNumberArray = input.Replace('\n', ',').Split(',');
 
-            numberStringArray = GetDelimiter(numberStringArray);
-            ValidateNegatives(numberStringArray);
-            return numberStringArray.Sum(x => int.Parse(x));
+            stringNumberArray = GetDelimiter(stringNumberArray);
+            ValidateNegatives(stringNumberArray);
+            return stringNumberArray.Sum(x => int.Parse(x));
         }
 
         public static void ValidateNegatives(string[] numberArray)
@@ -102,13 +102,13 @@ namespace StringCalculatorAugust8.Tests
             throw new ArgumentException($"negatives not allowed {string.Join(" ", numberArray.Where(x => int.Parse(x) < 0))}");
         }
 
-        private static string[] GetDelimiter(string[] numberStringArray)
+        private static string[] GetDelimiter(string[] numberArray)
         {
-            if (!numberStringArray[0].StartsWith("//")) return numberStringArray;
+            if (!numberArray[0].StartsWith("//")) return numberArray;
 
-            numberStringArray = numberStringArray[1].Replace(';', ',').Split(',');
+            numberArray = numberArray[1].Replace(';', ',').Split(',');
 
-            return numberStringArray;
+            return numberArray;
         }
     }
 }
