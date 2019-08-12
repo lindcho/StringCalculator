@@ -82,9 +82,14 @@ namespace StringCalculatorAugust8.Tests
             var numberStringArray = input.Replace('\n', ',').Split(',');
 
             numberStringArray = GetDelimiter(numberStringArray);
-            if (numberStringArray.Any(x => int.Parse(x) < 0))
-                throw new Exception($"negatives not allowed {string.Join(" ", numberStringArray.Where(x => int.Parse(x) < 0))}");
+            ValidateNegatives(numberStringArray);
             return numberStringArray.Sum(x => int.Parse(x));
+        }
+
+        public static void ValidateNegatives(string[] numberArray)
+        {
+            if (!numberArray.Any(x => int.Parse(x) < 0)) return;
+            throw new Exception($"negatives not allowed {string.Join(" ", numberArray.Where(x => int.Parse(x) < 0))}");
         }
 
         private static string[] GetDelimiter(string[] numberStringArray)
