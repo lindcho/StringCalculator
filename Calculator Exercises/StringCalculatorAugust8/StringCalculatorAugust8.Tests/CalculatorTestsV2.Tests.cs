@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 
@@ -7,14 +8,15 @@ namespace StringCalculatorAugust8.Tests
     [TestFixture]
     public class CalculatorTestsV2
     {
-        [Test]
-        public void Add_GivenEmptyInputAsString_ShouldReturnZero()
+
+        [TestCase("", 0)]
+        [TestCase(null, 0)]
+        public void Add_GivenEmptyInputAsString_ShouldReturnZero(string input, int expectedResult)
         {
             var sut = new CalculatorModel();
-            var input = "";
 
             var actual = sut.Add(input);
-            Assert.That(actual, Is.EqualTo(0));
+            Assert.That(actual, Is.EqualTo(expectedResult));
         }
 
         [TestCase("4", 4)]
@@ -72,12 +74,17 @@ namespace StringCalculatorAugust8.Tests
             Assert.That(actual.Message, Is.EqualTo(expectedResult));
         }
 
+        [TestCase("//;\n1;2", 3)]
+        [TestCase("//[***]\n1***2***3", 6)]
+        [TestCase("//[*][%]\n1*2%3", 6)]
+        public void Play_GivenInputWithDifferentDelimitersWithAnyLength_ShouldReturnSum(string input, int expectedResult)
         {
-            var sut=new CalculatorModel();
-            var input = "-1,-3,-2,-7";
-
-            var actual = Assert.Throws<ArgumentException>(() => sut.Add(input));
-            Assert.That(actual.Message,Is.EqualTo("negatives not allowed -1 -3 -2 -7"));
+            //Arrange
+            var sut = new CalculatorModel();
+            //Act
+            var actual = sut.Add(input);
+            //Assert
+            Assert.That(actual, Is.EqualTo(expectedResult));
         }
     }
 
@@ -89,18 +96,18 @@ namespace StringCalculatorAugust8.Tests
                 return 0;
             var stringNumberArray = input.Replace('\n', ',').Split(',');
 
-            stringNumberArray = GetDelimiter(stringNumberArray);
-            ValidateNegatives(stringNumberArray);
+            stringNumberArray = GetCustomDelimiter(stringNumberArray);
+            ValidateNumbersArePositive(stringNumberArray);
             return stringNumberArray.Sum(x => int.Parse(x));
         }
 
-        public static void ValidateNegatives(string[] numberArray)
+        public static void ValidateNumbersArePositive(string[] numberArray)
         {
             if (!numberArray.Any(x => int.Parse(x) < 0)) return;
             throw new ArgumentException($"negatives not allowed {string.Join(" ", numberArray.Where(x => int.Parse(x) < 0))}");
         }
 
-        private static string[] GetDelimiter(string[] numberArray)
+        private static string[] GetCustomDelimiter(string[] numberArray)
         {
             if (!numberArray[0].StartsWith("//")) return numberArray;
 
