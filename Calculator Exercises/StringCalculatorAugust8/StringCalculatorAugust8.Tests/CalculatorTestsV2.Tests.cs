@@ -62,18 +62,16 @@ namespace StringCalculatorAugust8.Tests
             Assert.That(actual, Is.EqualTo(expectedResult));
         }
 
-        [Test]
-        public void Add_GivenInputWithNegativeNumbers_ShouldThrowException()
+        [TestCase("2,3,-3,-2,1", "negatives not allowed -3 -2")]
+        [TestCase("-1,-3,-2,-7", "negatives not allowed -1 -3 -2 -7")]
+        public void Add_GivenInputWithNegativeNumbers_ShouldThrowException(string input, string expectedResult)
         {
             var sut = new CalculatorModel();
-            var input = "2,3,-3,-2,1";
 
             var actual = Assert.Throws<ArgumentException>(() => sut.Add(input));
-            Assert.That(actual.Message, Is.EqualTo("negatives not allowed -3 -2"));
+            Assert.That(actual.Message, Is.EqualTo(expectedResult));
         }
 
-        [Test]
-        public void Add_GivenInputWithNegativeNumber_shouldThrowException()
         {
             var sut=new CalculatorModel();
             var input = "-1,-3,-2,-7";
