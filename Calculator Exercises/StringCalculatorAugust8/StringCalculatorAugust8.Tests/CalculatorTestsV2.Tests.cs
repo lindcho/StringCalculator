@@ -94,16 +94,14 @@ namespace StringCalculatorAugust8.Tests
 
         private static string[] GetDelimiter(string[] numberStringArray)
         {
-            if (numberStringArray[0].StartsWith("//"))
+            if (!numberStringArray[0].StartsWith("//")) return numberStringArray;
+            var customDelimiter = numberStringArray[0].Remove(0, 2);
+            foreach (var delimiter in customDelimiter)
             {
-                var customDelimiter = numberStringArray[0].Remove(0, 2);
-                foreach (var delimiter in customDelimiter)
-                {
-                    numberStringArray[1] = numberStringArray[1].Replace(delimiter, ',');
-                }
-
-                numberStringArray = numberStringArray[1].Split(',');
+                numberStringArray[1] = numberStringArray[1].Replace(delimiter, ',');
             }
+
+            numberStringArray = numberStringArray[1].Split(',');
 
             return numberStringArray;
         }
