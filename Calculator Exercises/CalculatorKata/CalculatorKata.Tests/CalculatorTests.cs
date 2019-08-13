@@ -31,6 +31,7 @@ namespace CalculatorKata.Tests
         [TestCase("6,9",15)]
         [TestCase("120,56",176)]
         [TestCase("30,76",106)]
+        [TestCase("30,76,2,65,2,5",180)]
         public void Add_GivenTwoCommaSeparatedInput_ShouldReturnInputSum(string input,int expectedResult)
         {
             var sut=new Calculator();
@@ -52,7 +53,7 @@ namespace CalculatorKata.Tests
             if (input.Contains(','))
             {
                 var result = input.Split(',');
-                return int.Parse(result[0]) + int.Parse(result[1]);
+                return result.Sum(x=>int.Parse(x));
             }
             return int.Parse(input);
         }
