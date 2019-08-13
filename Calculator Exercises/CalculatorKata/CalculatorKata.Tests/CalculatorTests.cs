@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using NUnit.Framework.Constraints;
+using System.Linq;
 
 namespace CalculatorKata.Tests
 {
@@ -26,6 +27,17 @@ namespace CalculatorKata.Tests
             var actual = sut.Add(input);
             Assert.That(actual,Is.EqualTo(expectedResult));
         }
+
+        [TestCase("6,9",15)]
+        [TestCase("120,56",176)]
+        [TestCase("30,76",106)]
+        public void Add_GivenTwoCommaSeparatedInput_ShouldReturnInputSum(string input,int expectedResult)
+        {
+            var sut=new Calculator();
+
+            var actual = sut.Add(input);
+            Assert.That(actual,Is.EqualTo(expectedResult));
+        }
     }
 
     public class Calculator
@@ -35,6 +47,12 @@ namespace CalculatorKata.Tests
             if (string.IsNullOrEmpty(input))
             {
                 return 0;
+            }
+
+            if (input.Contains(','))
+            {
+                var result = input.Split(',');
+                return int.Parse(result[0]) + int.Parse(result[1]);
             }
             return int.Parse(input);
         }
