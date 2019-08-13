@@ -62,16 +62,9 @@ namespace CalculatorKata.Tests
                 return 0;
             }
 
-            if (input.Contains('\n'))
-            {
-                input = input.Replace('\n', ',');
-            }
-            if (input.Contains(','))
-            {
-                var result = input.Split(',');
-                return result.Sum(x=>int.Parse(x));
-            }
-            return int.Parse(input);
+            var inputArray = input.Replace('\n', ',').Split(',');
+            
+            return inputArray.Sum(x=>int.Parse(x));
         }
     }
 }
