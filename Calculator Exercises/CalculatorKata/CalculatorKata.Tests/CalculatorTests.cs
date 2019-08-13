@@ -11,7 +11,7 @@ namespace CalculatorKata.Tests
         [TestCase(null, 0)]
         public void Add_GivenEmptyString_ShouldReturnZero(string input, int expectedResult)
         {
-            var sut = new Calculator();
+            var sut = CreateCalculator();
 
             var actual = sut.Add(input);
             Assert.That(actual, Is.EqualTo(0));
@@ -22,7 +22,7 @@ namespace CalculatorKata.Tests
         [TestCase("143", 143)]
         public void Add_GivenValidNumber_ShouldReturnSameNumber(string input, int expectedResult)
         {
-            var sut = new Calculator();
+            var sut = CreateCalculator();
 
             var actual = sut.Add(input);
             Assert.That(actual, Is.EqualTo(expectedResult));
@@ -34,7 +34,7 @@ namespace CalculatorKata.Tests
         [TestCase("30,76,2,65,2,5", 180)]
         public void Add_GivenTwoCommaSeparatedInput_ShouldReturnInputSum(string input, int expectedResult)
         {
-            var sut = new Calculator();
+            var sut = CreateCalculator();
 
             var actual = sut.Add(input);
             Assert.That(actual, Is.EqualTo(expectedResult));
@@ -46,7 +46,7 @@ namespace CalculatorKata.Tests
         [TestCase("1\n5,4", 10)]
         public void Add_GivenNewLineDelimiterBetweenInput_ShouldReturnInputSum(string input, int expectedResult)
         {
-            var sut = new Calculator();
+            var sut = CreateCalculator();
 
             var actual = sut.Add(input);
             Assert.That(actual, Is.EqualTo(expectedResult));
@@ -55,12 +55,18 @@ namespace CalculatorKata.Tests
         [TestCase("//;\n1;2", 3)]
         [TestCase("//;\n43;2,3", 45)]
         [TestCase("//;\n7;2;6;5", 20)]
+        [TestCase("//$\n1", 1)]
         public void Add_GivenCustomDelimiterBetweenInput_ShouldReturnInputSum(string input, int expectedResult)
         {
-            var sut = new Calculator();
+            var sut = CreateCalculator();
 
             var actual = sut.Add(input);
             Assert.That(actual, Is.EqualTo(expectedResult));
+        }
+
+        private static Calculator CreateCalculator()
+        {
+            return new Calculator();
         }
     }
 
