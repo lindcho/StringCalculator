@@ -39,6 +39,18 @@ namespace CalculatorKata.Tests
             var actual = sut.Add(input);
             Assert.That(actual,Is.EqualTo(expectedResult));
         }
+
+        [TestCase("1\n2", 3)]
+        [TestCase("1\n14", 15)]
+        [TestCase("1\n1,4", 6)]
+        [TestCase("1\n5,4", 10)]
+        public void Add_GivenNewLineDelimiterBetweenInput_ShouldReturnInputSum(string input,int expectedResult)
+        {
+            var sut=new Calculator();
+
+            var actual = sut.Add(input);
+            Assert.That(actual,Is.EqualTo(expectedResult));
+        }
     }
 
     public class Calculator
@@ -50,6 +62,10 @@ namespace CalculatorKata.Tests
                 return 0;
             }
 
+            if (input.Contains('\n'))
+            {
+                input = input.Replace('\n', ',');
+            }
             if (input.Contains(','))
             {
                 var result = input.Split(',');
