@@ -43,7 +43,7 @@ namespace StringCalculatorAugust7
 
                 foreach (var delimiter in customDelimiters)
                 {
-                    numberStringArray[1] = NumbersPart(numberStringArray).Replace(delimiter, ',').Trim("[".ToCharArray()).Trim();
+                    numberStringArray[1] = NumbersPart(numberStringArray).Replace(delimiter, ',');
                 }
                 numberStringArray = NumbersPart(numberStringArray).Split(',');
             }
