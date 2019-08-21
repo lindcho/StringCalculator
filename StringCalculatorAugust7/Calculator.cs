@@ -25,7 +25,7 @@ namespace StringCalculatorAugust7
 
         private static IEnumerable<int> GetNumbersLessThan1000(int[] numberArray)
         {
-            return numberArray.Where(x => x < 1000);
+            return numberArray.Where(x => x <= 1000);
         }
 
         private static void ValidateNegativeNumbers(string[] numberArray)

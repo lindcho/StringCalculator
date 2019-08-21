@@ -6,10 +6,16 @@ namespace StringCalculatorAugust7.Tests
     [TestFixture]
     public class CalculatorTest
     {
+
+        private static Calculator CreateCalculator()
+        {
+            return new Calculator();
+        }
+
         [Test]
         public void Add_GivenInputWithEmptyString_ShouldReturnZero()
         {
-            var sut = new Calculator();
+            var sut = CreateCalculator();
             var input = "";
             //Act
             var actual = sut.Add(input);
@@ -24,7 +30,7 @@ namespace StringCalculatorAugust7.Tests
         public void Add_GivenInputWithOneDigit_ShouldReturnThatDigit(string input, int expectedResult)
         {
             //Arrange
-            var sut = new Calculator();
+            var sut = CreateCalculator();
             //Act
             var actual = sut.Add(input);
             //Assert
@@ -38,7 +44,7 @@ namespace StringCalculatorAugust7.Tests
         public void Add_GivenInputWithComma_ShouldReturnSum(string input, int expectedResult)
         {
             //Arrange
-            var sut = new Calculator();
+            var sut = CreateCalculator();
             //Act
             var actual = sut.Add(input);
             //Assert
@@ -51,7 +57,7 @@ namespace StringCalculatorAugust7.Tests
         public void Add_GivenInputWithNewLines_ShouldHandleNewlinesAndReturnSum(string input, int expectedResult)
         {
             //Arrange
-            var sut = new Calculator();
+            var sut = CreateCalculator();
             //Act
             var actual = sut.Add(input);
             //Assert
@@ -64,7 +70,7 @@ namespace StringCalculatorAugust7.Tests
         public void Add_GivenInputWithDelimiters_ShouldReturnSum(string input, int expectedResult)
         {
             //Arrange
-            var sut = new Calculator();
+            var sut = CreateCalculator();
             //Act
             var actual = sut.Add(input);
             //Assert
@@ -72,10 +78,11 @@ namespace StringCalculatorAugust7.Tests
         }
 
         [TestCase("//[*][%]\n1*2%3", 6)]
+        [TestCase("//[****][%%%%@]\n2*1%8", 11)]
         public void Play_GivenInputWithDifferentDelimitersWithAnyLength_ShouldReturnSum(string input, int expectedResult)
         {
             //Arrange
-            var sut = new Calculator();
+            var sut = CreateCalculator();
             //Act
             var actual = sut.Add(input);
             //Assert
@@ -87,7 +94,7 @@ namespace StringCalculatorAugust7.Tests
         public void Play_GivenInputWithDifferentDelimitersWithStarSigns_ShouldReturnTheirSum(string input, int expectedResult)
         {
             //Arrange
-            var sut = new Calculator();
+            var sut = CreateCalculator();
             //Act
             var actual = sut.Add(input);
             //Assert
@@ -99,12 +106,25 @@ namespace StringCalculatorAugust7.Tests
         [TestCase("1,9,-20,10", "negatives not allowed -20")]
         public void Add_GivenInputWithNegativeNumbers_ShouldReturnNegativesNotAllowed(string input, string expectedMessage)
         {
-            //
-            var sut = new Calculator();
+            //Arrange
+            var sut = CreateCalculator();
             //
             var ex = Assert.Throws<Exception>(() => sut.Add(input));
             //
             Assert.That(ex.Message, Is.EqualTo(expectedMessage));
+        }
+
+        [TestCase("//;\n2;1001", 2)]
+        [TestCase("//;\n3;1020;5", 8)]
+        [TestCase("//;\n2;1000;9", 1011)]
+        public void Play_GivenNumberGreaterThan1000_ShouldIgnoreThatNumber(string input, int expectedResult)
+        {
+            //Arrange
+            var sut = CreateCalculator();
+            //Act
+            var actual = sut.Add(input);
+            //Assert
+            Assert.That(actual, Is.EqualTo(expectedResult));
         }
     }
 }
