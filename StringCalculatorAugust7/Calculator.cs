@@ -16,19 +16,19 @@ namespace StringCalculatorAugust7
 
             GetCustomDelimiter(ref numbers);
 
-            ValidateNegatives(numbers);
+            ValidateNegativeNumbers(numbers);
 
             var numberArray = numbers.Where(x => !string.IsNullOrEmpty(x)).Select(int.Parse).ToArray();
 
-            return FilterNumbersLessThan1000(numberArray).Sum(x => x);
+            return GetNumbersLessThan1000(numberArray).Sum(x => x);
         }
 
-        private static IEnumerable<int> FilterNumbersLessThan1000(int[] numberArray)
+        private static IEnumerable<int> GetNumbersLessThan1000(int[] numberArray)
         {
             return numberArray.Where(x => x < 1000);
         }
 
-        private static void ValidateNegatives(string[] numberArray)
+        private static void ValidateNegativeNumbers(string[] numberArray)
         {
             var negativeNumbers = numberArray.Where(x => int.Parse(x) < 0).ToList();
             if (!negativeNumbers.Any()) return;
